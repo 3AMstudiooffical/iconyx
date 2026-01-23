@@ -1,0 +1,1784 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Iconyx — Visual Assets for Ads and Motion</title>
+  <meta name="description" content="Iconyx generates high contrast visual assets for ads, motion, and modern design." />
+
+  <style>
+    :root{
+      --bg:#f6f5f2;
+      --panel:#ffffff;
+      --ink:#0b0b0b;
+      --muted:rgba(11,11,11,.64);
+      --border:rgba(11,11,11,.10);
+      --border2:rgba(11,11,11,.12);
+      --shadow:0 18px 60px rgba(11,11,11,.08);
+      --shadow2:0 10px 26px rgba(11,11,11,.08);
+      --radius2:24px;
+      --max:1120px;
+      --ease:cubic-bezier(.2,.8,.2,1);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:var(--bg);
+      color:var(--ink);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+    }
+    a{color:inherit}
+    img{max-width:100%;height:auto;display:block}
+
+    .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+    .section{padding:96px 0}
+    .section.tight{padding:72px 0}
+
+    /* premium background taste */
+    .bg-noise{
+      position:fixed;inset:0;pointer-events:none;z-index:-2;
+      background:
+        radial-gradient(900px 420px at 14% 14%, rgba(11,11,11,.05), transparent 60%),
+        radial-gradient(820px 380px at 88% 24%, rgba(11,11,11,.04), transparent 58%),
+        radial-gradient(900px 520px at 52% 92%, rgba(11,11,11,.035), transparent 62%);
+      opacity:.95;
+    }
+    .grain{
+      position:fixed;inset:-40px;pointer-events:none;z-index:-1;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E");
+      background-size: 160px 160px;
+      mix-blend-mode:multiply;
+      opacity:.12;
+      transform: rotate(1deg);
+    }
+
+    /* header */
+    .header{
+      position:sticky;top:0;z-index:50;
+      background:rgba(246,245,242,.70);
+      backdrop-filter: blur(14px);
+      border-bottom:1px solid rgba(11,11,11,.06);
+    }
+    .header-inner{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:14px 0;
+    }
+    .brand{display:flex;align-items:center;gap:12px;min-width:170px;}
+    .brand-mark{
+      width:54px;height:54px;border-radius:16px;
+      display:grid;place-items:center;
+      background:rgba(255,255,255,.62);
+      border:1px solid var(--border);
+      box-shadow:0 10px 22px rgba(11,11,11,.05);
+      overflow:hidden;
+    }
+    .brand-mark img{width:42px;height:42px;object-fit:contain}
+    .nav{
+      display:flex;align-items:center;gap:18px;
+      font-size:14px;color:rgba(11,11,11,.78);
+    }
+    .nav a{
+      text-decoration:none;
+      padding:8px 10px;border-radius:12px;
+      transition: background .25s var(--ease), color .25s var(--ease), transform .25s var(--ease);
+    }
+    .nav a:hover{background:rgba(11,11,11,.06);color:rgba(11,11,11,.95);transform: translateY(-1px)}
+    .hdr-right{display:flex;align-items:center;gap:10px;min-width:170px;justify-content:flex-end;}
+
+    /* buttons */
+    .btn{
+      appearance:none;
+      border:1px solid var(--border2);
+      background:rgba(255,255,255,.70);
+      color:var(--ink);
+      padding:10px 14px;
+      border-radius:14px;
+      font-weight:650;font-size:14px;
+      cursor:pointer;
+      transition: transform .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
+      box-shadow:0 10px 22px rgba(11,11,11,.05);
+      text-decoration:none;
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      user-select:none;
+    }
+    .btn:hover{transform: translateY(-1px); box-shadow:0 16px 34px rgba(11,11,11,.08)}
+    .btn:active{transform: translateY(0px); box-shadow:0 10px 22px rgba(11,11,11,.05)}
+    .btn.primary{
+      background:var(--ink);
+      color:#fff;
+      border-color: rgba(11,11,11,.22);
+      box-shadow:0 18px 54px rgba(11,11,11,.18);
+    }
+    .btn.primary:hover{background:#000}
+    .btn.ghost{background:transparent;box-shadow:none;border-color: var(--border)}
+    .btn.small{padding:8px 12px;border-radius:12px;font-size:13px}
+
+    /* hero */
+    .hero{padding:72px 0 44px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap:26px;
+      align-items:stretch;
+    }
+    .kicker{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 12px;border-radius:999px;
+      background:rgba(255,255,255,.62);
+      border:1px solid var(--border);
+      box-shadow:0 12px 34px rgba(11,11,11,.05);
+      font-size:13px;
+      color:rgba(11,11,11,.72);
+    }
+    .kicker-dot{
+      width:8px;height:8px;border-radius:999px;background:var(--ink);
+      box-shadow:0 0 0 6px rgba(11,11,11,.08);
+    }
+
+    /* ✅ NEW: premium pain-line pill (adds your “tired…” idea without ruining luxury feel) */
+    .pain-pill{
+      margin-top:10px;
+      display:inline-flex;align-items:center;gap:10px;
+      padding:10px 12px;border-radius:999px;
+      background:rgba(255,255,255,.70);
+      border:1px solid var(--border);
+      box-shadow:0 12px 26px rgba(11,11,11,.06);
+      font-size:13px;
+      color:rgba(11,11,11,.70);
+      max-width: 72ch;
+    }
+    .pain-pill .mini{
+      width:8px;height:8px;border-radius:999px;background:rgba(11,11,11,.82);
+      box-shadow:0 0 0 6px rgba(11,11,11,.06);
+      flex:0 0 auto;
+    }
+
+    h1{
+      margin:16px 0 12px;
+      font-size: clamp(34px, 4.2vw, 58px);
+      line-height:1.05;
+      letter-spacing:-.02em;
+    }
+    .sub{
+      margin:0 0 18px;
+      font-size: 16.7px;
+      line-height:1.55;
+      color:var(--muted);
+      max-width: 54ch;
+    }
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+
+    .hero-card{
+      position:relative;
+      border-radius:var(--radius2);
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      min-height: 430px;
+      background:
+        radial-gradient(520px 320px at 70% 18%, rgba(11,11,11,.06), transparent 62%),
+        rgba(255,255,255,.62);
+    }
+    .hero-inner{
+      position:relative;
+      height:100%;
+      padding:28px 26px 74px;
+      padding-top:48px;
+    }
+    .hero-canvas{position:absolute;inset:0;pointer-events:none;}
+    .float{
+      position:absolute;
+      transform: translate3d(0,0,0);
+      will-change: transform;
+      filter: drop-shadow(0 24px 48px rgba(11,11,11,.10));
+      opacity:.98;
+    }
+    .hero-structure{
+      z-index:1;
+      width: 620px;
+      left: -60px;
+      bottom: -170px;
+      opacity:.18;
+      filter: drop-shadow(0 24px 60px rgba(11,11,11,.08));
+    }
+    .hero-visual{
+      z-index:4;
+      width:min(360px, 76%);
+      right: 10px;
+      top: 12px;
+      bottom:auto;
+      max-height:420px;
+      object-fit:contain;
+    }
+    .hero-note{
+      position:absolute;
+      left:18px; right:18px; bottom:16px;
+      background:rgba(255,255,255,.78);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:10px 12px;
+      font-size:13px;
+      color:rgba(11,11,11,.75);
+      box-shadow:0 12px 34px rgba(11,11,11,.06);
+      z-index:6;
+      width:auto;
+      max-width:unset;
+    }
+
+    /* section headers */
+    .sect-head{
+      display:flex;align-items:flex-end;justify-content:space-between;gap:14px;
+      margin-bottom: 22px;
+    }
+    .sect-title{
+      margin:0;
+      font-size: clamp(22px, 2.4vw, 30px);
+      letter-spacing:-.015em;
+      line-height:1.15;
+    }
+    .sect-desc{
+      margin:0;
+      color:rgba(11,11,11,.62);
+      font-size:14.6px;
+      line-height:1.5;
+      max-width: 50ch;
+    }
+
+    .card{
+      background:rgba(255,255,255,.70);
+      border:1px solid var(--border);
+      border-radius:var(--radius2);
+      box-shadow:var(--shadow2);
+      overflow:hidden;
+    }
+    .card.pad{padding:18px}
+
+    /* how it works */
+    .how-grid{display:grid;grid-template-columns: repeat(3,1fr);gap:18px}
+    .step{
+      padding:18px;
+      background:rgba(255,255,255,.74);
+      border:1px solid var(--border);
+      border-radius:var(--radius2);
+      box-shadow:var(--shadow2);
+      display:flex;flex-direction:column;gap:10px;
+      min-height: 170px;
+    }
+    .step-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .step-num{
+      width:34px;height:34px;border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(11,11,11,.06);
+      display:grid;place-items:center;
+      font-weight:820;
+      font-size:13px;
+    }
+    .step-icon{
+      width:42px;height:42px;border-radius:16px;
+      border:1px solid var(--border);
+      background:#fff;
+      box-shadow:0 12px 26px rgba(11,11,11,.06);
+      display:grid;place-items:center;
+      overflow:hidden;
+    }
+    .step-icon img{width:26px;height:26px;object-fit:contain}
+    .step h3{margin:0;font-size:16.5px;letter-spacing:-.01em}
+    .step p{margin:0;color:rgba(11,11,11,.62);font-size:13.5px;line-height:1.55}
+
+    /* QUALITY / TRUST */
+    .quality-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+    }
+    .q-card{
+      padding:22px;
+      background:rgba(255,255,255,.76);
+      border:1px solid var(--border);
+      border-radius:var(--radius2);
+      box-shadow:var(--shadow2);
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .q-card.bad{border-color:rgba(255,0,0,.18)}
+    .q-card.good{border-color:rgba(0,0,0,.16)}
+
+    .q-tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12.5px;
+      font-weight:700;
+      width:max-content;
+    }
+    .q-card.bad .q-tag{background:rgba(255,0,0,.10);color:#a00000;}
+    .q-card.good .q-tag{background:rgba(0,0,0,.85);color:#fff;}
+
+    .icon-row{display:flex;gap:12px;margin-top:10px;flex-wrap:wrap}
+    .icon-chip{
+      width:72px;height:72px;
+      border-radius:20px;
+      border:1px solid var(--border);
+      background:#fff;
+      box-shadow:0 10px 26px rgba(11,11,11,.08);
+      display:grid;place-items:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .icon-chip svg{width:40px;height:40px}
+    .q-meta{
+      margin-top:4px;
+      font-size:13px;
+      color:rgba(11,11,11,.56);
+    }
+
+    .mini-grid{
+      display:grid;
+      grid-template-columns: repeat(3,1fr);
+      gap:18px;
+      margin-top:18px;
+    }
+    .mini{
+      padding:18px;
+      background:rgba(255,255,255,.76);
+      border:1px solid var(--border);
+      border-radius:var(--radius2);
+      box-shadow:var(--shadow2);
+    }
+    .mini h4{margin:0 0 6px;font-size:15px}
+    .mini p{margin:0;font-size:13.4px;color:rgba(11,11,11,.62)}
+
+    .license{
+      margin-top:18px;
+      padding:16px 18px;
+      border-radius:var(--radius2);
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.78);
+      box-shadow:var(--shadow2);
+      font-size:13.5px;
+      color:rgba(11,11,11,.72);
+    }
+    .license strong{color:rgba(11,11,11,.92)}
+
+    /* reveal */
+    .reveal{
+      opacity:0;
+      transform: translateY(12px);
+      transition: opacity .7s var(--ease), transform .7s var(--ease);
+    }
+    .reveal.in{opacity:1;transform: translateY(0)}
+
+    /* responsive */
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns: 1fr;}
+      .how-grid{grid-template-columns: 1fr;}
+      .quality-grid{grid-template-columns: 1fr;}
+      .mini-grid{grid-template-columns: 1fr;}
+      .hdr-right{min-width:auto}
+      .brand{min-width:auto}
+    }
+    @media (max-width: 520px){
+      .section{padding:78px 0}
+      .hero{padding:54px 0 34px}
+      .nav{display:none}
+      .hero-inner{padding:24px 18px 88px; padding-top:42px;}
+      .hero-visual{width:min(330px, 86%); right:6px; top:10px;}
+      .hero-structure{left:-90px; bottom:-210px; width:680px; opacity:.14;}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-noise"></div>
+  <div class="grain"></div>
+
+  <script>
+    const ASSETS = {
+      logo: "https://github.com/3AMstudiooffical/iconyx-assets/blob/59141a844f946d5e89737cd736b0a50959d81a5f/assets/visuals/Iconyx%20logo.png?raw=true",
+      heroMan: "https://github.com/3AMstudiooffical/iconyx-assets/blob/59141a844f946d5e89737cd736b0a50959d81a5f/assets/visuals/man%20with%20lightbulb%20head.png?raw=true",
+      linesThick: "https://github.com/3AMstudiooffical/iconyx-assets/blob/59141a844f946d5e89737cd736b0a50959d81a5f/assets/visuals/Thick%20black%20lines.PNG?raw=true",
+      book: "https://github.com/3AMstudiooffical/iconyx-assets/blob/59141a844f946d5e89737cd736b0a50959d81a5f/assets/visuals/Book.png?raw=true",
+      camera: "https://github.com/3AMstudiooffical/iconyx-assets/blob/59141a844f946d5e89737cd736b0a50959d81a5f/assets/visuals/Camera.png?raw=true",
+      clock: "https://github.com/3AMstudiooffical/iconyx-assets/blob/59141a844f946d5e89737cd736b0a50959d81a5f/assets/visuals/Alarm%20Clock%20(1).PNG?raw=true"
+    };
+  </script>
+
+  <header class="header">
+    <div class="wrap">
+      <div class="header-inner">
+        <div class="brand">
+          <div class="brand-mark"><img id="logoTop" alt="Iconyx" /></div>
+        </div>
+
+        <nav class="nav">
+          <a href="#how">How it works</a>
+          <a href="#quality">Quality</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#generate">Generate</a>
+        </nav>
+
+        <div class="hdr-right">
+          <button class="btn small ghost" id="toggleAuth">Log in</button>
+          <a class="btn small primary" href="#generate">Generate assets</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div class="reveal">
+            <div class="kicker">
+              <span class="kicker-dot"></span>
+              <span>Designed for ads and motion</span>
+            </div>
+
+            <!-- ✅ NEW: your “tired of spending hours…” message (compressed + premium) -->
+            <div class="pain-pill">
+              <span class="mini"></span>
+              <span>Stop wasting hours on icons that don’t match — or aren’t transparent.</span>
+            </div>
+
+            <h1>High contrast AI icons that don’t look AI.</h1>
+
+            <p class="sub">
+              Clean silhouettes, consistent systems, and transparent PNGs built for
+              CapCut, After Effects, and modern ad workflows.
+            </p>
+
+            <div class="cta-row">
+              <a class="btn primary" href="#generate">Generate icons</a>
+              <a class="btn" href="#quality">Why Iconyx</a>
+            </div>
+          </div>
+
+          <div class="hero-card reveal">
+            <div class="hero-inner">
+              <div class="hero-canvas">
+                <img id="heroStructure" class="float hero-structure" alt="" />
+                <img id="heroVisual" class="float hero-visual" alt="Iconyx visual" />
+              </div>
+              <div class="hero-note">
+                Transparent PNG · Consistent stroke · Motion ready
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXTRA STYLES (kept here to keep Part 1–2 lighter) -->
+    <style>
+      /* features */
+      .features-grid{display:grid;grid-template-columns: repeat(4,1fr);gap:18px}
+      .feat{
+        padding:18px;
+        background:rgba(255,255,255,.74);
+        border:1px solid var(--border);
+        border-radius:var(--radius2);
+        box-shadow:var(--shadow2);
+        display:flex;flex-direction:column;gap:10px;
+        min-height: 170px;
+      }
+      .feat .icon{
+        width:46px;height:46px;border-radius:18px;
+        border:1px solid var(--border);
+        background:#fff;
+        box-shadow:0 12px 26px rgba(11,11,11,.06);
+        display:grid;place-items:center;
+        overflow:hidden;
+      }
+      .feat .icon svg{width:28px;height:28px}
+      .feat h4{margin:0;font-size:15px;letter-spacing:-.01em}
+      .feat p{margin:0;color:rgba(11,11,11,.62);font-size:13.3px;line-height:1.55}
+
+      /* examples */
+      .examples-grid{
+        display:grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap:18px;
+        align-items:stretch;
+      }
+      .ex{
+        position:relative;
+        background:var(--panel);
+        border:1px solid var(--border);
+        border-radius:var(--radius2);
+        box-shadow:var(--shadow2);
+        overflow:hidden;
+        min-height: 165px;
+        padding:18px;
+        display:flex;
+        flex-direction:column;
+        justify-content:space-between;
+        transition: transform .22s var(--ease), box-shadow .22s var(--ease);
+      }
+      .ex .cap{
+        font-size:13px;color:rgba(11,11,11,.62);
+        display:flex;align-items:center;gap:10px;
+      }
+      .cap .pill{
+        padding:7px 10px;border-radius:999px;
+        background:rgba(11,11,11,.05);
+        border:1px solid var(--border);
+        color:rgba(11,11,11,.78);
+        font-weight:650;
+        font-size:12.5px;
+      }
+      .ex .asset{
+        width: 92px;height:92px;
+        display:grid;place-items:center;
+        border-radius:18px;
+        background:#fff;
+        border:1px solid var(--border);
+        box-shadow:0 12px 28px rgba(11,11,11,.06);
+        margin-left:auto;
+        overflow:hidden;
+        z-index:3;
+      }
+      .ex .asset img{width:70px;height:70px;object-fit:contain}
+      .ex .bg-acc{
+        position:absolute;
+        pointer-events:none;
+        z-index:1;
+        opacity:.20;
+        filter: drop-shadow(0 20px 44px rgba(11,11,11,.10));
+        transform: translate3d(0,0,0);
+        will-change: transform;
+      }
+      .ex:hover{transform: translateY(-1px);box-shadow:0 18px 52px rgba(11,11,11,.10)}
+      .ex:hover .bg-acc{opacity:.26}
+      .span-4{grid-column: span 4;}
+      .span-6{grid-column: span 6;}
+      .span-8{grid-column: span 8;}
+
+      /* generator */
+      .gen-grid{
+        display:grid;
+        grid-template-columns: .92fr 1.08fr;
+        gap:18px;
+        align-items:stretch;
+      }
+      .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}
+      .tab{
+        border:1px solid var(--border);
+        background:rgba(255,255,255,.78);
+        color:rgba(11,11,11,.78);
+        padding:8px 10px;border-radius:999px;
+        font-size:13px;font-weight:650;
+        cursor:pointer;
+        transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease);
+        user-select:none;
+      }
+      .tab:hover{background:rgba(11,11,11,.06)}
+      .tab.active{
+        background:var(--ink);
+        color:#fff;
+        border-color: rgba(11,11,11,.22);
+        box-shadow:0 12px 26px rgba(11,11,11,.10);
+      }
+      .field{
+        display:flex;align-items:center;justify-content:space-between;gap:12px;
+        padding:12px 12px;
+        border:1px solid var(--border);
+        border-radius:16px;
+        background:rgba(255,255,255,.78);
+        margin-bottom:10px;
+      }
+      .field .label{font-size:13.5px;color:rgba(11,11,11,.74);font-weight:650}
+      .field .hint{font-size:12px;color:rgba(11,11,11,.55)}
+      select, input[type="text"], input[type="email"], textarea{
+        width: 48%;
+        padding:10px 12px;
+        border-radius:14px;
+        border:1px solid var(--border2);
+        background:#fff;
+        outline:none;
+        font-size:13.5px;
+        color:rgba(11,11,11,.82);
+      }
+      textarea{width:100%;min-height:120px;resize:vertical}
+      .toggle{display:flex;align-items:center;gap:10px}
+      .switch{
+        width:44px;height:26px;border-radius:999px;
+        border:1px solid var(--border2);
+        background:rgba(11,11,11,.10);
+        position:relative;
+        cursor:pointer;
+        transition: background .2s var(--ease);
+        flex: 0 0 auto;
+      }
+      .switch::after{
+        content:"";
+        width:20px;height:20px;border-radius:999px;
+        background:#fff;
+        position:absolute;top:50%;left:3px;
+        transform: translateY(-50%);
+        box-shadow:0 8px 18px rgba(11,11,11,.12);
+        transition: left .2s var(--ease);
+      }
+      .switch.on{background:rgba(11,11,11,.60)}
+      .switch.on::after{left:21px}
+
+      .preview{
+        position:relative;
+        border-radius:var(--radius2);
+        border:1px solid var(--border);
+        background:var(--panel);
+        box-shadow:var(--shadow2);
+        overflow:hidden;
+        padding:18px;
+        min-height: 420px;
+        display:flex;
+        flex-direction:column;
+        gap:14px;
+      }
+      .preview-top{
+        display:flex;align-items:center;justify-content:space-between;gap:10px;
+        padding-bottom: 10px;
+        border-bottom:1px solid var(--border);
+      }
+      .preview-top .title{font-weight:750;letter-spacing:-.01em;font-size:14px}
+      .preview-top .meta{font-size:12.5px;color:rgba(11,11,11,.58)}
+      .preview-card{
+        flex:1;
+        border-radius:18px;
+        border:1px solid var(--border);
+        background:#fff;
+        box-shadow:0 16px 42px rgba(11,11,11,.06);
+        display:grid;place-items:center;
+        position:relative;
+        overflow:hidden;
+      }
+      .preview-card img{
+        width: 190px;height:190px;object-fit:contain;
+        filter: drop-shadow(0 22px 44px rgba(11,11,11,.10));
+      }
+      .loader{
+        position:absolute;
+        bottom:16px;left:16px;
+        display:flex;align-items:center;gap:10px;
+        padding:10px 12px;border-radius:999px;
+        background:rgba(255,255,255,.84);
+        border:1px solid var(--border);
+        box-shadow:0 12px 26px rgba(11,11,11,.06);
+        font-size:12.5px;color:rgba(11,11,11,.72);
+        opacity:0;
+        transform: translateY(6px);
+        transition: opacity .2s var(--ease), transform .2s var(--ease);
+        pointer-events:none;
+      }
+      .loader.on{opacity:1;transform: translateY(0)}
+      .dots{display:inline-flex;gap:4px;align-items:center}
+      .dots i{
+        width:6px;height:6px;border-radius:999px;background:rgba(11,11,11,.70);
+        display:inline-block;
+        animation: pulse 1s infinite var(--ease);
+      }
+      .dots i:nth-child(2){animation-delay:.14s}
+      .dots i:nth-child(3){animation-delay:.28s}
+      @keyframes pulse{
+        0%,100%{opacity:.25;transform: translateY(0)}
+        50%{opacity:1;transform: translateY(-2px)}
+      }
+
+      /* pricing */
+      .pricing-grid{display:grid;grid-template-columns: repeat(3, 1fr);gap:18px}
+      .plan{
+        position:relative;
+        padding:18px;
+        background:rgba(255,255,255,.70);
+        border:1px solid var(--border);
+        border-radius:var(--radius2);
+        box-shadow:var(--shadow2);
+        overflow:hidden;
+        min-height: 285px;
+        display:flex;flex-direction:column;gap:12px;
+      }
+      .plan h3{margin:4px 0 0;font-size:18px;letter-spacing:-.01em}
+      .plan .desc{margin:0;color:rgba(11,11,11,.60);font-size:13.5px;line-height:1.5}
+      .credits{display:flex;align-items:baseline;gap:10px;margin-top:2px}
+      .credits .num{font-size:34px;font-weight:820;letter-spacing:-.02em;line-height:1}
+      .credits .lab{font-size:13px;color:rgba(11,11,11,.62);font-weight:650}
+      .price{margin-top:-6px;font-size:14px;color:rgba(11,11,11,.72)}
+      .most{
+        position:absolute;top:14px;right:14px;
+        padding:8px 10px;border-radius:999px;
+        background:rgba(11,11,11,.92);
+        color:#fff;
+        font-size:12px;font-weight:750;
+        letter-spacing:.02em;
+        box-shadow:0 18px 46px rgba(11,11,11,.18);
+        display:flex;align-items:center;gap:8px;
+      }
+      .plan .line{height:1px;background:var(--border);margin:8px 0 6px}
+      .plan ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+      .plan li{
+        font-size:13.5px;color:rgba(11,11,11,.72);
+        display:flex;gap:10px;align-items:flex-start;
+      }
+      .plan li::before{
+        content:"";
+        width:8px;height:8px;border-radius:999px;background:rgba(11,11,11,.90);
+        margin-top:6px;
+        box-shadow:0 0 0 5px rgba(11,11,11,.08);
+        flex:0 0 auto;
+      }
+
+      /* guarantee */
+      .guarantee{
+        margin-top:16px;
+        padding:16px 16px;
+        border-radius:var(--radius2);
+        border:1px solid var(--border);
+        background:rgba(255,255,255,.74);
+        box-shadow:var(--shadow2);
+        display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      }
+      .guarantee .left{display:flex;align-items:center;gap:12px}
+      .guarantee .mark{
+        width:44px;height:44px;border-radius:18px;
+        border:1px solid var(--border);
+        background:#fff;
+        box-shadow:0 12px 26px rgba(11,11,11,.06);
+        display:grid;place-items:center;
+        overflow:hidden;
+      }
+      .guarantee .txt{color:rgba(11,11,11,.70);font-size:13.6px;line-height:1.5;max-width: 70ch}
+      .guarantee .txt strong{color:rgba(11,11,11,.92)}
+
+      /* faq */
+      .faq-grid{display:grid;grid-template-columns: 1fr 1fr;gap:18px}
+      details{
+        background:rgba(255,255,255,.78);
+        border:1px solid var(--border);
+        border-radius:var(--radius2);
+        box-shadow:var(--shadow2);
+        padding:16px 16px;
+        transition: transform .2s var(--ease), box-shadow .2s var(--ease);
+      }
+      details:hover{transform: translateY(-1px); box-shadow:0 18px 50px rgba(11,11,11,.10)}
+      summary{
+        cursor:pointer;
+        font-weight:760;
+        letter-spacing:-.01em;
+        font-size:14.5px;
+        list-style:none;
+        display:flex;align-items:center;justify-content:space-between;gap:10px;
+      }
+      summary::-webkit-details-marker{display:none}
+      summary .chev{
+        width:34px;height:34px;border-radius:999px;
+        border:1px solid var(--border);
+        background:rgba(255,255,255,.80);
+        display:grid;place-items:center;
+        box-shadow:0 12px 26px rgba(11,11,11,.06);
+        flex:0 0 auto;
+        transition: transform .2s var(--ease);
+      }
+      details[open] summary .chev{transform: rotate(180deg)}
+      .faq-a{
+        margin:10px 0 0;
+        color:rgba(11,11,11,.64);
+        font-size:13.5px;
+        line-height:1.6;
+        max-width: 70ch;
+      }
+
+      /* footer */
+      .footer{
+        padding:34px 0 50px;
+        border-top:1px solid rgba(11,11,11,.07);
+        background:rgba(255,255,255,.18);
+      }
+      .footer-inner{
+        display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+      }
+      .foot-left{display:flex;align-items:center;gap:12px}
+      .foot-left .mark{
+        width:36px;height:36px;border-radius:12px;
+        border:1px solid var(--border);
+        background:rgba(255,255,255,.62);
+        display:grid;place-items:center;
+        box-shadow:0 12px 26px rgba(11,11,11,.06);
+        overflow:hidden;
+      }
+      .foot-left .mark img{width:28px;height:28px;object-fit:contain}
+      .foot-meta{font-size:13px;color:rgba(11,11,11,.62);line-height:1.45}
+      .foot-meta strong{color:rgba(11,11,11,.86)}
+      .foot-right{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+
+      /* toast */
+      .toast{
+        position:fixed;left:50%;bottom:18px;transform: translateX(-50%);
+        background:rgba(255,255,255,.88);
+        border:1px solid var(--border);
+        border-radius:999px;
+        box-shadow:0 18px 56px rgba(11,11,11,.12);
+        padding:12px 14px;
+        display:flex;align-items:center;gap:10px;
+        font-size:13px;color:rgba(11,11,11,.74);
+        opacity:0;pointer-events:none;
+        transition: opacity .25s var(--ease), transform .25s var(--ease);
+        max-width: min(92vw, 560px);
+        z-index:100;
+      }
+      .toast.on{
+        opacity:1;pointer-events:auto;
+        transform: translateX(-50%) translateY(-2px);
+      }
+      .toast .dot{
+        width:8px;height:8px;border-radius:999px;background:var(--ink);
+        box-shadow:0 0 0 6px rgba(11,11,11,.08);
+        flex:0 0 auto;
+      }
+      .toast .msg{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+      /* responsive overrides */
+      @media (max-width: 980px){
+        .gen-grid{grid-template-columns: 1fr;}
+        .pricing-grid{grid-template-columns: 1fr;}
+        .faq-grid{grid-template-columns: 1fr;}
+      }
+      @media (max-width: 520px){
+        select, input[type="text"], input[type="email"]{width:100%}
+        .field{flex-direction:column;align-items:flex-start}
+      }
+    </style>
+
+    <!-- HOW IT WORKS -->
+    <section class="section tight" id="how">
+      <div class="wrap">
+        <div class="sect-head reveal">
+          <div>
+            <h2 class="sect-title">How it works</h2>
+            <p class="sect-desc">A simple flow that keeps you moving fast.</p>
+          </div>
+          <a class="btn" href="#generate">Start generating</a>
+        </div>
+
+        <div class="how-grid">
+          <div class="step reveal">
+            <div class="step-top">
+              <div class="step-num">1</div>
+              <div class="step-icon"><img id="how1" alt="Prompt icon" /></div>
+            </div>
+            <h3>Describe what you need</h3>
+            <p>Short prompt. Clean icon output. Built for high contrast overlays.</p>
+          </div>
+
+          <div class="step reveal">
+            <div class="step-top">
+              <div class="step-num">2</div>
+              <div class="step-icon"><img id="how2" alt="Generate icon" /></div>
+            </div>
+            <h3>Generate transparent PNG</h3>
+            <p>Instant preview on white. Download will work once backend is connected.</p>
+          </div>
+
+          <div class="step reveal">
+            <div class="step-top">
+              <div class="step-num">3</div>
+              <div class="step-icon"><img id="how3" alt="Motion icon" /></div>
+            </div>
+            <h3>Drop into CapCut</h3>
+            <p>Stack icons, animate, add text. Finish like a pro editor.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section tight" id="features">
+      <div class="wrap">
+        <div class="sect-head reveal">
+          <div>
+            <h2 class="sect-title">Built for clean motion</h2>
+            <p class="sect-desc">A tight visual system that stays consistent across ads.</p>
+          </div>
+        </div>
+
+        <div class="features-grid">
+          <div class="feat reveal">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="rgba(11,11,11,.9)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 7l-8 10-4-4"/>
+              </svg>
+            </div>
+            <h4>Transparent by default</h4>
+            <p>Every icon is meant to layer instantly into your edits.</p>
+          </div>
+
+          <div class="feat reveal">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="rgba(11,11,11,.9)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2l2.6 6.6L22 9l-5 4.2L18.2 21 12 17.6 5.8 21 7 13.2 2 9l7.4-.4L12 2z"/>
+              </svg>
+            </div>
+            <h4>Consistent black style</h4>
+            <p>High contrast silhouettes designed to read fast in ads.</p>
+          </div>
+
+          <div class="feat reveal">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="rgba(11,11,11,.9)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/>
+              </svg>
+            </div>
+            <h4>Fast iteration</h4>
+            <p>Generate options quickly until you hit the exact vibe.</p>
+          </div>
+
+          <div class="feat reveal">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="rgba(11,11,11,.9)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 12h16"/><path d="M12 4v16"/>
+              </svg>
+            </div>
+            <h4>Motion ready</h4>
+            <p>Shapes and accents that animate cleanly in CapCut.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUALITY / TRUST (more visual, real icons) -->
+    <section class="section tight" id="quality">
+      <div class="wrap">
+        <div class="sect-head reveal">
+          <div>
+            <h2 class="sect-title">Built as systems, not singles</h2>
+            <p class="sect-desc">Why Iconyx icons feel human and production-ready.</p>
+          </div>
+          <a class="btn" href="#generate">Generate now</a>
+        </div>
+
+        <div class="quality-grid">
+          <div class="q-card bad reveal">
+            <div class="q-tag">❌ Typical AI</div>
+            <h3 style="margin:0;font-size:17px;letter-spacing:-.01em">Random, inconsistent sets</h3>
+            <p style="margin:0;color:rgba(11,11,11,.62);font-size:13.5px;line-height:1.55">
+              Different stroke weights, different geometry, and icons that don’t belong together.
+            </p>
+
+            <!-- upgraded “bad” set: purposely inconsistent -->
+            <div class="icon-row" aria-label="Inconsistent icons">
+              <div class="icon-chip" style="border-radius:24px">
+                <svg viewBox="0 0 24 24" fill="none" stroke="rgba(11,11,11,.9)" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2l2.6 6.6L22 9l-5 4.2L18.2 21 12 17.6 5.8 21 7 13.2 2 9l7.4-.4L12 2z"/>
+                </svg>
+              </div>
+              <div class="icon-chip" style="border-radius:14px; transform: translateY(2px);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="rgba(11,11,11,.9)" stroke-width="2.9" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="7"/>
+                  <path d="M12 8v9"/>
+                </svg>
+              </div>
+              <div class="icon-chip" style="border-radius:28px; transform: translateX(-2px);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="rgba(11,11,11,.9)" stroke-width="1.7" stroke-linecap="square" stroke-linejoin="miter">
+                  <path d="M7 17l10-10"/>
+                  <path d="M7 7h10v10H7z"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="q-meta" style="margin-top:10px;color:rgba(11,11,11,.62);font-size:13.2px">
+              Looks “AI” because nothing matches.
+            </div>
+          </div>
+
+          <div class="q-card good reveal">
+            <div class="q-tag">✓ Iconyx</div>
+            <h3 style="margin:0;font-size:17px;letter-spacing:-.01em">Matched icon systems</h3>
+            <p style="margin:0;color:rgba(11,11,11,.62);font-size:13.5px;line-height:1.55">
+              Consistent stroke, consistent geometry, and clean balance across every set.
+            </p>
+
+            <!-- upgraded “good” set: consistent weight/spacing/radii -->
+            <div class="icon-row" aria-label="Consistent icon set">
+              <div class="icon-chip" style="border-radius:20px">
+                <svg viewBox="0 0 24 24" fill="none" stroke="rgba(11,11,11,.9)" stroke-width="2.15" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2l2.6 6.6L22 9l-5 4.2L18.2 21 12 17.6 5.8 21 7 13.2 2 9l7.4-.4L12 2z"/>
+                </svg>
+              </div>
+              <div class="icon-chip" style="border-radius:20px">
+                <svg viewBox="0 0 24 24" fill="none" stroke="rgba(11,11,11,.9)" stroke-width="2.15" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="7"/>
+                  <path d="M12 9v6"/>
+                  <path d="M9 12h6"/>
+                </svg>
+              </div>
+              <div class="icon-chip" style="border-radius:20px">
+                <svg viewBox="0 0 24 24" fill="none" stroke="rgba(11,11,11,.9)" stroke-width="2.15" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 7h8"/>
+                  <path d="M7 11h10"/>
+                  <path d="M9 15h6"/>
+                  <path d="M10 19h4"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="q-meta" style="margin-top:10px;color:rgba(11,11,11,.62);font-size:13.2px">
+              Feels designed because everything matches.
+            </div>
+          </div>
+        </div>
+
+        <div class="mini-grid">
+          <div class="mini reveal">
+            <h4>Consistent stroke</h4>
+            <p>No mismatched line weights across a set.</p>
+          </div>
+          <div class="mini reveal">
+            <h4>Optical balance</h4>
+            <p>Icons feel centered and intentional.</p>
+          </div>
+          <div class="mini reveal">
+            <h4>Export ready</h4>
+            <p>Transparent outputs for instant use.</p>
+          </div>
+        </div>
+
+        <div class="license reveal">
+          <strong>Commercial use included.</strong> Use icons in ads, client work, products, and content with no attribution.
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT (functional mailto submit) -->
+    <section class="section tight" id="contact">
+      <div class="wrap">
+        <div class="sect-head reveal">
+          <div>
+            <h2 class="sect-title">Contact</h2>
+            <p class="sect-desc">If anything breaks or you need a fix, message us.</p>
+          </div>
+        </div>
+
+        <div class="card pad reveal">
+          <form id="contactForm">
+            <div class="field">
+              <div>
+                <div class="label">Name</div>
+                <div class="hint">Who should we reply to</div>
+              </div>
+              <input id="cName" type="text" placeholder="Your name" required />
+            </div>
+
+            <div class="field">
+              <div>
+                <div class="label">Email</div>
+                <div class="hint">So we can respond</div>
+              </div>
+              <input id="cEmail" type="email" placeholder="you@email.com" required />
+            </div>
+
+            <div class="field" style="align-items:flex-start">
+              <div>
+                <div class="label">Message</div>
+                <div class="hint">Be specific (what page/section)</div>
+              </div>
+              <textarea id="cMsg" placeholder="Tell us what you need..." required></textarea>
+            </div>
+
+            <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center;margin-top:10px">
+              <button class="btn primary" type="submit">Send message</button>
+              <div style="color:rgba(11,11,11,.58);font-size:12.8px;line-height:1.45">
+                This opens your email app to send to <strong>iconyxforicons@gmail.com</strong>.
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXAMPLES -->
+    <section class="section tight" id="examples">
+      <div class="wrap">
+        <div class="sect-head reveal">
+          <div>
+            <h2 class="sect-title">Examples</h2>
+            <p class="sect-desc">Clean accents you can drop into ads and motion instantly.</p>
+          </div>
+          <a class="btn" href="#generate">Open generator</a>
+        </div>
+
+        <div class="examples-grid">
+          <div class="ex span-6 reveal">
+            <div class="asset">
+              <img id="ex1Asset" alt="Accent icon example" />
+            </div>
+            <div class="cap">
+              <span class="pill">Accent</span>
+              <span>Fast attention anchors</span>
+            </div>
+            <img class="bg-acc" id="ex1Bg" alt="" style="right:-24px; top:-30px; width:210px;" />
+          </div>
+
+          <div class="ex span-6 reveal">
+            <div class="asset">
+              <img id="ex2Asset" alt="Structure icon example" />
+            </div>
+            <div class="cap">
+              <span class="pill">Structure</span>
+              <span>Layout blocks for rhythm</span>
+            </div>
+            <img class="bg-acc" id="ex2Bg" alt="" style="left:-26px; bottom:-40px; width:280px; opacity:.16" />
+          </div>
+
+          <div class="ex span-4 reveal">
+            <div class="asset">
+              <img id="ex3Asset" alt="Micro icon example" />
+            </div>
+            <div class="cap">
+              <span class="pill">Micro</span>
+              <span>Small guides that pop</span>
+            </div>
+            <img class="bg-acc" id="ex3Bg" alt="" style="right:-34px; bottom:-48px; width:240px; opacity:.15" />
+          </div>
+
+          <div class="ex span-8 reveal">
+            <div class="asset">
+              <img id="ex4Asset" alt="Frame icon example" />
+            </div>
+            <div class="cap">
+              <span class="pill">Frame</span>
+              <span>Clean motion ready framing</span>
+            </div>
+            <img class="bg-acc" id="ex4Bg" alt="" style="left:-18px; top:-32px; width:240px; opacity:.15" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GENERATE -->
+    <section class="section" id="generate">
+      <div class="wrap">
+        <div class="sect-head reveal">
+          <div>
+            <h2 class="sect-title">Generate</h2>
+            <p class="sect-desc">Front end demo. Backend will connect login, credits, checkout, and real generation.</p>
+          </div>
+          <div class="proof-pill" id="creditPill" title="Placeholder until backend is connected">
+            <span>Credits</span>
+            <strong id="creditCount">—</strong>
+          </div>
+        </div>
+
+        <div class="gen-grid">
+          <div class="card pad reveal">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+              <div>
+                <div style="font-weight:820;letter-spacing:-.01em">Generator</div>
+                <div style="margin-top:6px;color:rgba(11,11,11,.62);font-size:13.5px;line-height:1.5">
+                  Generate clean icon assets fast, then finish in CapCut or After Effects.
+                </div>
+              </div>
+              <div class="btn small" id="demoMode" title="Front end demo toggle">Demo</div>
+            </div>
+
+            <div class="tabs" role="tablist" aria-label="Categories">
+              <button class="tab active" data-cat="objects" type="button">Objects</button>
+              <button class="tab" data-cat="shapes" type="button">Shapes</button>
+              <button class="tab" data-cat="lines" type="button">Lines</button>
+              <button class="tab" data-cat="symbols" type="button">Symbols</button>
+            </div>
+
+            <div class="field">
+              <div>
+                <div class="label">Prompt</div>
+                <div class="hint">Short and specific</div>
+              </div>
+              <input id="promptInput" type="text" placeholder="e.g. matte black burst marker" />
+            </div>
+
+            <div class="field">
+              <div>
+                <div class="label">Style</div>
+                <div class="hint">Keeps outputs consistent</div>
+              </div>
+              <select id="styleSelect">
+                <option value="clean" selected>Clean</option>
+                <option value="bold">Bold</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div>
+                <div class="label">Background</div>
+                <div class="hint">Locked</div>
+              </div>
+              <select disabled>
+                <option selected>Transparent</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div>
+                <div class="label">Size</div>
+                <div class="hint">1024 default, 2048 optional</div>
+              </div>
+              <div class="toggle">
+                <div class="hint">2048</div>
+                <div class="switch" id="sizeToggle" role="switch" aria-checked="false" tabindex="0"></div>
+              </div>
+            </div>
+
+            <div class="gen-actions" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+              <button class="btn primary" id="genBtn" type="button">Generate</button>
+              <button class="btn" id="buyBtn" style="display:none" data-plan="pro" type="button">Buy credits</button>
+            </div>
+
+            <div style="margin-top:10px;color:rgba(11,11,11,.58);font-size:12.8px;line-height:1.55">
+              Backend will wire generation, deduct credits, and return a downloadable PNG.
+            </div>
+          </div>
+
+          <div class="preview reveal">
+            <div class="preview-top">
+              <div>
+                <div class="title">Preview</div>
+                <div class="meta" id="previewMeta">Transparent PNG · 1024 · Objects</div>
+              </div>
+              <button class="btn small" id="downloadBtn" disabled type="button">Download</button>
+            </div>
+
+            <div class="preview-card" id="previewCard">
+              <img id="previewImg" alt="Preview asset" />
+              <div class="loader" id="loader">
+                <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span id="loaderText">Generating</span>
+              </div>
+            </div>
+
+            <div class="card pad" style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+              <div style="color:rgba(11,11,11,.68);font-size:13.2px;line-height:1.45">
+                Tip: keep prompts short. Let the system do the art direction.
+              </div>
+              <div class="btn small ghost" id="resetBtn" role="button" tabindex="0">Reset</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="section tight" id="pricing">
+      <div class="wrap">
+        <div class="sect-head reveal">
+          <div>
+            <h2 class="sect-title">Pricing</h2>
+            <p class="sect-desc">Credits first. Clean value. One free generation on signup later.</p>
+          </div>
+        </div>
+
+        <div class="pricing-grid">
+          <div class="plan reveal">
+            <h3>Starter</h3>
+            <p class="desc">Quick assets for consistent posting.</p>
+            <div class="credits"><div class="num">50</div><div class="lab">credits</div></div>
+            <div class="price">$9</div>
+            <div class="line"></div>
+            <ul>
+              <li>High contrast PNG outputs</li>
+              <li>Transparent background</li>
+              <li>Credits never expire</li>
+            </ul>
+            <div style="margin-top:auto;display:flex;gap:10px;flex-wrap:wrap">
+              <button class="btn primary" data-plan="starter" type="button" onclick="purchasePlan('starter')">Buy Starter</button>
+              <button class="btn" type="button" onclick="scrollToId('generate')">Try generator</button>
+            </div>
+          </div>
+
+          <div class="plan reveal" style="border-color:rgba(11,11,11,.14); box-shadow:0 22px 66px rgba(11,11,11,.12)">
+            <div class="most">
+              <span style="display:inline-block;width:14px;height:14px;line-height:14px;text-align:center">★</span>
+              Most popular
+            </div>
+            <h3>Pro</h3>
+            <p class="desc">Best balance for creators running ads weekly.</p>
+            <div class="credits"><div class="num">150</div><div class="lab">credits</div></div>
+            <div class="price">$19</div>
+            <div class="line"></div>
+            <ul>
+              <li>Fast iteration for weekly ads</li>
+              <li>Clear best value per workflow</li>
+              <li>Credits never expire</li>
+            </ul>
+            <div style="margin-top:auto;display:flex;gap:10px;flex-wrap:wrap">
+              <button class="btn primary" data-plan="pro" type="button" onclick="purchasePlan('pro')">Buy Pro</button>
+              <button class="btn" type="button" onclick="scrollToId('examples')">See examples</button>
+            </div>
+          </div>
+
+          <div class="plan reveal">
+            <h3>Studio</h3>
+            <p class="desc">For heavier production and asset batching.</p>
+            <div class="credits"><div class="num">400</div><div class="lab">credits</div></div>
+            <div class="price">$39</div>
+            <div class="line"></div>
+            <ul>
+              <li>Built for repeated testing</li>
+              <li>Best value per credit</li>
+              <li>Credits never expire</li>
+            </ul>
+            <div style="margin-top:auto;display:flex;gap:10px;flex-wrap:wrap">
+              <button class="btn primary" data-plan="studio" type="button" onclick="purchasePlan('studio')">Buy Studio</button>
+              <button class="btn" type="button" onclick="scrollToId('generate')">Open generator</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="guarantee reveal">
+          <div class="left">
+            <div class="mark" aria-hidden="true" style="font-weight:900">✓</div>
+            <div class="txt">
+              <strong>Simple guarantee.</strong> If your first pack does not fit your workflow, message us and we will make it right.
+            </div>
+          </div>
+          <button class="btn" type="button" onclick="scrollToId('contact')">Contact us</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section tight" id="faq">
+      <div class="wrap">
+        <div class="sect-head reveal">
+          <div>
+            <h2 class="sect-title">FAQ</h2>
+            <p class="sect-desc">Short answers. No fluff.</p>
+          </div>
+        </div>
+
+        <div class="faq-grid">
+          <details class="reveal">
+            <summary>What are credits <span class="chev">⌄</span></summary>
+            <div class="faq-a">Credits are used per generation. Your account will track your balance and deduct automatically on each successful output.</div>
+          </details>
+
+          <details class="reveal">
+            <summary>Do credits expire <span class="chev">⌄</span></summary>
+            <div class="faq-a">No. Credits never expire. Buy once and use when you need them.</div>
+          </details>
+
+          <details class="reveal">
+            <summary>Why transparent background <span class="chev">⌄</span></summary>
+            <div class="faq-a">Transparent PNGs drop into CapCut and modern design workflows without cleanup. Preview is shown on white.</div>
+          </details>
+
+          <details class="reveal">
+            <summary>How does the contact form work <span class="chev">⌄</span></summary>
+            <div class="faq-a">For now, it opens your email app with a pre-filled message to iconyxforicons@gmail.com. When backend is connected, it can send automatically.</div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footer-inner">
+          <div class="foot-left">
+            <div class="mark"><img id="logoFoot" alt="Iconyx" /></div>
+            <div class="foot-meta">
+              <strong>Iconyx</strong><br/>
+              <span>AI icons built for motion.</span>
+            </div>
+          </div>
+
+          <div class="foot-right">
+            <button class="btn small ghost" type="button" onclick="scrollToId('quality')">Quality</button>
+            <button class="btn small ghost" type="button" onclick="scrollToId('pricing')">Pricing</button>
+            <button class="btn small ghost" type="button" onclick="scrollToId('contact')">Contact</button>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="dot" aria-hidden="true"></span>
+    <span class="msg" id="toastMsg">Saved</span>
+  </div>
+
+  <script>
+    /* ===== Extend ASSETS ===== */
+    Object.assign(ASSETS, {
+      iphone: "https://github.com/3AMstudiooffical/iconyx-assets/blob/59141a844f946d5e89737cd736b0a50959d81a5f/assets/visuals/iPhone.png?raw=true",
+      rect: "https://github.com/3AMstudiooffical/iconyx-assets/blob/59141a844f946d5e89737cd736b0a50959d81a5f/assets/visuals/black%20rectangle.PNG?raw=true",
+      rectThick: "https://github.com/3AMstudiooffical/iconyx-assets/blob/59141a844f946d5e89737cd736b0a50959d81a5f/assets/visuals/thick%20black%20rectangle.PNG?raw=true",
+      linesThin: "https://github.com/3AMstudiooffical/iconyx-assets/blob/59141a844f946d5e89737cd736b0a50959d81a5f/assets/visuals/Thin%20black%20lines.PNG?raw=true",
+      dottedCircle: "https://github.com/3AMstudiooffical/iconyx-assets/blob/59141a844f946d5e89737cd736b0a50959d81a5f/assets/visuals/Dotted%20Circle.png?raw=true",
+      starRounded: "https://github.com/3AMstudiooffical/iconyx-assets/blob/59141a844f946d5e89737cd736b0a50959d81a5f/assets/visuals/Rounded%20star.png?raw=true",
+      starBoom: "https://github.com/3AMstudiooffical/iconyx-assets/blob/59141a844f946d5e89737cd736b0a50959d81a5f/assets/visuals/Boom%20star.png?raw=true",
+      dot: "https://github.com/3AMstudiooffical/iconyx-assets/blob/59141a844f946d5e89737cd736b0a50959d81a5f/assets/visuals/Black%20dot.png?raw=true"
+    });
+
+    const setSrc = (id, url) => {
+      const el = document.getElementById(id);
+      if (el) el.src = url;
+    };
+
+    /* top + footer logos */
+    setSrc("logoTop", ASSETS.logo);
+    setSrc("logoFoot", ASSETS.logo);
+
+    /* hero */
+    setSrc("heroVisual", ASSETS.heroMan);
+    setSrc("heroStructure", ASSETS.linesThick);
+
+    /* how it works icons */
+    setSrc("how1", ASSETS.book);
+    setSrc("how2", ASSETS.camera);
+    setSrc("how3", ASSETS.clock);
+
+    /* examples */
+    setSrc("ex1Asset", ASSETS.starBoom);
+    setSrc("ex1Bg", ASSETS.starRounded);
+    setSrc("ex2Asset", ASSETS.rectThick);
+    setSrc("ex2Bg", ASSETS.linesThin);
+    setSrc("ex3Asset", ASSETS.dot);
+    setSrc("ex3Bg", ASSETS.dottedCircle);
+    setSrc("ex4Asset", ASSETS.iphone);
+    setSrc("ex4Bg", ASSETS.rect);
+
+    /* default preview */
+    setSrc("previewImg", ASSETS.starRounded);
+
+    function scrollToId(id){
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+    window.scrollToId = scrollToId;
+
+    /* Smooth anchor links */
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener("click",(e)=>{
+        const hash = a.getAttribute("href");
+        if(!hash || hash === "#") return;
+        const id = hash.replace("#","");
+        const el = document.getElementById(id);
+        if(el){
+          e.preventDefault();
+          scrollToId(id);
+          history.replaceState(null,"",hash);
+        }
+      });
+    });
+
+    /* Reveal */
+    const revealEls = Array.from(document.querySelectorAll(".reveal"));
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{
+        if(en.isIntersecting){
+          en.target.classList.add("in");
+          io.unobserve(en.target);
+        }
+      });
+    }, {threshold: 0.12});
+    revealEls.forEach(el=>io.observe(el));
+
+    /* Parallax */
+    const parallaxEls = [
+      {el: document.getElementById("heroVisual"), amt: 8},
+      {el: document.getElementById("heroStructure"), amt: 4},
+      {el: document.getElementById("ex1Bg"), amt: 7},
+      {el: document.getElementById("ex2Bg"), amt: 5},
+      {el: document.getElementById("ex3Bg"), amt: 7},
+      {el: document.getElementById("ex4Bg"), amt: 5},
+    ].filter(x=>x.el);
+
+    let raf = null;
+    function onScrollParallax(){
+      if(raf) return;
+      raf = requestAnimationFrame(()=>{
+        parallaxEls.forEach(({el, amt})=>{
+          const r = el.getBoundingClientRect();
+          const mid = (r.top + r.height * 0.5) - (window.innerHeight * 0.5);
+          const t = Math.max(-1, Math.min(1, mid / (window.innerHeight * 0.9)));
+          const offset = -t * amt;
+          el.style.transform = `translate3d(0, ${offset.toFixed(2)}px, 0)`;
+        });
+        raf = null;
+      });
+    }
+    window.addEventListener("scroll", onScrollParallax, {passive:true});
+    onScrollParallax();
+
+    /* Demo generator state */
+    const State = {
+      auth: "logged_out",
+      credits: 0,
+      category: "objects",
+      size: 1024,
+      style: "clean",
+      isGenerating: false
+    };
+
+    const genBtn = document.getElementById("genBtn");
+    const buyBtn = document.getElementById("buyBtn");
+    const creditCount = document.getElementById("creditCount");
+    const creditPill = document.getElementById("creditPill");
+    const previewMeta = document.getElementById("previewMeta");
+    const loader = document.getElementById("loader");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const toggleAuth = document.getElementById("toggleAuth");
+    const promptInput = document.getElementById("promptInput");
+    const styleSelect = document.getElementById("styleSelect");
+    const sizeToggle = document.getElementById("sizeToggle");
+    const previewImg = document.getElementById("previewImg");
+    const resetBtn = document.getElementById("resetBtn");
+    const demoMode = document.getElementById("demoMode");
+
+    function cap(s){return s ? s.charAt(0).toUpperCase()+s.slice(1) : s}
+    function updateMeta(){ if(previewMeta) previewMeta.textContent = `Transparent PNG · ${State.size} · ${cap(State.category)}`; }
+
+    function updateHeaderAuth(){ if(toggleAuth) toggleAuth.textContent = (State.auth === "logged_in") ? "Log out" : "Log in"; }
+    function updateCredits(){
+      if(!creditCount || !creditPill) return;
+      creditCount.textContent = (State.auth === "logged_in") ? String(State.credits) : "—";
+      creditPill.style.opacity = (State.auth === "logged_in") ? "1" : ".78";
+    }
+    function updateButtons(){
+      if(!genBtn || !buyBtn) return;
+
+      if(State.isGenerating){
+        genBtn.textContent = "Generating";
+        genBtn.disabled = true;
+        buyBtn.style.display = "none";
+        return;
+      }
+      if(State.auth === "logged_out"){
+        genBtn.textContent = "Generate";
+        genBtn.disabled = false;
+        buyBtn.style.display = "none";
+        return;
+      }
+      if(State.credits > 0){
+        genBtn.textContent = "Generate";
+        genBtn.disabled = false;
+        buyBtn.style.display = "none";
+      }else{
+        genBtn.textContent = "Buy credits";
+        genBtn.disabled = false;
+        buyBtn.style.display = "inline-flex";
+      }
+    }
+
+    function setCategory(cat){
+      State.category = cat;
+      document.querySelectorAll(".tab").forEach(t=>{
+        t.classList.toggle("active", t.dataset.cat === cat);
+      });
+      updateMeta();
+    }
+    document.querySelectorAll(".tab").forEach(t=>{
+      t.addEventListener("click", ()=> setCategory(t.dataset.cat));
+    });
+
+    if(styleSelect){
+      styleSelect.addEventListener("change", ()=>{
+        State.style = styleSelect.value;
+        toast(`Style set to ${cap(State.style)}`);
+      });
+    }
+
+    function setSize(is2048){
+      State.size = is2048 ? 2048 : 1024;
+      if(sizeToggle){
+        sizeToggle.classList.toggle("on", is2048);
+        sizeToggle.setAttribute("aria-checked", String(is2048));
+      }
+      updateMeta();
+      toast(`Size set to ${State.size}`);
+    }
+    if(sizeToggle){
+      sizeToggle.addEventListener("click", ()=> setSize(!sizeToggle.classList.contains("on")));
+      sizeToggle.addEventListener("keydown", (e)=>{
+        if(e.key === "Enter" || e.key === " "){
+          e.preventDefault();
+          setSize(!sizeToggle.classList.contains("on"));
+        }
+      });
+    }
+
+    let demoOn = false;
+    if(demoMode){
+      demoMode.addEventListener("click", ()=>{
+        demoOn = !demoOn;
+        if(demoOn){
+          State.auth = "logged_in";
+          State.credits = 1;
+          toast("Demo enabled");
+        }else{
+          State.auth = "logged_out";
+          State.credits = 0;
+          toast("Demo disabled");
+        }
+        updateAll();
+      });
+    }
+
+    if(toggleAuth){
+      toggleAuth.addEventListener("click", ()=>{
+        if(State.auth === "logged_out"){
+          State.auth = "logged_in";
+          State.credits = Math.max(State.credits, 1);
+          toast("Logged in");
+        }else{
+          State.auth = "logged_out";
+          State.credits = 0;
+          toast("Logged out");
+        }
+        updateAll();
+      });
+    }
+
+    function wait(ms){ return new Promise(r=>setTimeout(r, ms)); }
+
+    if(genBtn){
+      genBtn.addEventListener("click", async ()=>{
+        if(State.isGenerating) return;
+
+        if(State.auth === "logged_out"){
+          toast("Log in to use a free generation later");
+          State.auth = "logged_in";
+          State.credits = 1;
+          updateAll();
+          return;
+        }
+
+        if(State.credits <= 0){
+          toast("Credits required. Choose a plan below");
+          scrollToId("pricing");
+          return;
+        }
+
+        State.isGenerating = true;
+        if(loader) loader.classList.add("on");
+        if(downloadBtn) downloadBtn.disabled = true;
+        updateButtons();
+
+        const prompt = (promptInput?.value || "").trim().toLowerCase();
+
+        let nextImg = ASSETS.starRounded;
+        if(prompt.includes("burst") || prompt.includes("boom")) nextImg = ASSETS.starBoom;
+        else if(prompt.includes("dot")) nextImg = ASSETS.dot;
+        else if(prompt.includes("circle")) nextImg = ASSETS.dottedCircle;
+        else if(prompt.includes("line")) nextImg = ASSETS.linesThin;
+        else if(prompt.includes("frame") || prompt.includes("phone")) nextImg = ASSETS.iphone;
+        else if(prompt.includes("block") || prompt.includes("rect")) nextImg = ASSETS.rectThick;
+        else if(prompt.includes("idea") || prompt.includes("light")) nextImg = ASSETS.heroMan;
+
+        await wait(900);
+        if(previewImg) previewImg.src = nextImg;
+
+        await wait(450);
+
+        State.credits = Math.max(0, State.credits - 1);
+        State.isGenerating = false;
+        if(loader) loader.classList.remove("on");
+        if(downloadBtn) downloadBtn.disabled = false;
+
+        updateAll();
+        toast("Generated");
+      });
+    }
+
+    if(buyBtn){
+      buyBtn.addEventListener("click", ()=>{
+        toast("Checkout will open here later");
+        scrollToId("pricing");
+      });
+    }
+
+    if(downloadBtn){
+      downloadBtn.addEventListener("click", ()=>{
+        toast("Download will be connected later");
+      });
+    }
+
+    if(resetBtn){
+      const doReset = ()=>{
+        if(promptInput) promptInput.value = "";
+        if(previewImg) previewImg.src = ASSETS.starRounded;
+        toast("Reset");
+      };
+      resetBtn.addEventListener("click", doReset);
+      resetBtn.addEventListener("keydown", (e)=>{
+        if(e.key === "Enter" || e.key === " "){
+          e.preventDefault();
+          doReset();
+        }
+      });
+    }
+
+    function updateAll(){
+      updateHeaderAuth();
+      updateCredits();
+      updateButtons();
+      updateMeta();
+    }
+
+    function purchasePlan(plan){
+      toast(`Checkout for ${cap(plan)} will open later`);
+    }
+    window.purchasePlan = purchasePlan;
+
+    /* Contact form (functional mailto submit) */
+    const contactForm = document.getElementById("contactForm");
+    if(contactForm){
+      contactForm.addEventListener("submit", (e)=>{
+        e.preventDefault();
+        const name = (document.getElementById("cName")?.value || "").trim();
+        const email = (document.getElementById("cEmail")?.value || "").trim();
+        const msg = (document.getElementById("cMsg")?.value || "").trim();
+
+        if(!name || !email || !msg){
+          toast("Please fill all fields");
+          return;
+        }
+
+        const to = "iconyxforicons@gmail.com";
+        const subject = encodeURIComponent(`Iconyx Support — ${name}`);
+        const body = encodeURIComponent(
+          `Name: ${name}\nEmail: ${email}\n\nMessage:\n${msg}\n\n— Sent from Iconyx website`
+        );
+
+        toast("Opening email…");
+        window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+      });
+    }
+
+    /* Toast */
+    const toastEl = document.getElementById("toast");
+    const toastMsg = document.getElementById("toastMsg");
+    let toastT = null;
+
+    function toast(message){
+      if(!toastEl || !toastMsg) return;
+      toastMsg.textContent = message;
+      toastEl.classList.add("on");
+      clearTimeout(toastT);
+      toastT = setTimeout(()=> toastEl.classList.remove("on"), 2400);
+    }
+
+    updateAll();
+  </script>
+</body>
+</html>
