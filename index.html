@@ -1740,30 +1740,45 @@
     }
     window.purchasePlan = purchasePlan;
 
-    /* Contact form (functional mailto submit) */
-    const contactForm = document.getElementById("contactForm");
-    if(contactForm){
-      contactForm.addEventListener("submit", (e)=>{
-        e.preventDefault();
-        const name = (document.getElementById("cName")?.value || "").trim();
-        const email = (document.getElementById("cEmail")?.value || "").trim();
-        const msg = (document.getElementById("cMsg")?.value || "").trim();
+  const contactForm = document.getElementById("contactForm");
 
-        if(!name || !email || !msg){
-          toast("Please fill all fields");
-          return;
-        }
+if (contactForm) {
+  contactForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-        const to = "iconyxforicons@gmail.com";
-        const subject = encodeURIComponent(`Iconyx Support — ${name}`);
-        const body = encodeURIComponent(
-          `Name: ${name}\nEmail: ${email}\n\nMessage:\n${msg}\n\n— Sent from Iconyx website`
-        );
+    const name = (document.getElementById("cName")?.value || "").trim();
+    const email = (document.getElementById("cEmail")?.value || "").trim();
+    const message = (document.getElementById("cMsg")?.value || "").trim();
 
-        toast("Opening email…");
-        window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
-      });
+    if (!name || !email || !message) {
+      toast("Please fill all fields");
+      return;
     }
+
+    try {
+      toast("Sending…");
+
+      const r = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      const out = await r.json();
+
+      if (!r.ok || !out.ok) {
+        toast("Failed to send. Try again.");
+        return;
+      }
+
+      toast("Message sent ✅");
+      contactForm.reset();
+    } catch (err) {
+      toast("Network error. Try again.");
+    }
+  });
+}
+
 
     /* Toast */
     const toastEl = document.getElementById("toast");
