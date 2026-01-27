@@ -1904,14 +1904,12 @@ try{
 
  async function purchasePlan(plan){
   try{
-    // Must be logged in so we can attach credits to the right user
     if(!session?.user?.id){
       toast("Log in to purchase a plan");
       openAuthModal();
       return;
     }
 
-    // Optional: if you want email passed to Stripe Checkout
     const email = session?.user?.email || null;
 
     const r = await fetch("/api/stripe-checkout", {
@@ -1926,20 +1924,12 @@ try{
 
     const j = await r.json().catch(()=>null);
 
-    if(!r.ok){
-      const msg = j?.error || "Checkout failed";
-      console.error("stripe-checkout failed:", j);
-      toast(msg);
+    if(!r.ok || !j?.url){
+      console.error("stripe-checkout failed", j);
+      toast(j?.error || "Checkout failed");
       return;
     }
 
-    if(!j?.url){
-      toast("Checkout URL missing");
-      console.error("No url returned:", j);
-      return;
-    }
-
-    // Redirect to Stripe Checkout
     window.location.href = j.url;
 
   }catch(err){
@@ -1991,6 +1981,7 @@ try{
   </script>
 </body>
 </html>
+
 
 
 
