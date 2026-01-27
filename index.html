@@ -1804,6 +1804,37 @@ if(toggleAuth){
           scrollToId("pricing");
           return;
         }
+// Spend 1 credit server-side (atomic)
+try{
+  if(!session?.access_token){
+    toast("Session missing. Log in again.");
+    openAuthModal();
+    return;
+  }
+
+  const r = await fetch("/api/credits-spend", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${session.access_token}`
+    }
+  });
+
+  const j = await r.json();
+
+  if(!r.ok || !j.ok){
+    // NO_CREDITS will come back here too
+    console.error("credits-spend failed", j);
+    toast("Credits spend failed");
+    return;
+  }
+
+  State.credits = Number(j.credits || 0);
+  updateAll();
+}catch(err){
+  console.error(err);
+  toast("Credits spend failed");
+  return;
+}
 
         State.isGenerating = true;
         if(loader) loader.classList.add("on");
@@ -1933,6 +1964,7 @@ if (contactForm) {
   </script>
 </body>
 </html>
+
 
 
 
