@@ -1640,20 +1640,11 @@
     }
 
     let demoOn = false;
-    if(demoMode){
+    if(demoMode)
       demoMode.addEventListener("click", ()=>{
-        demoOn = !demoOn;
-        if(demoOn){
-          State.auth = "logged_in";
-          State.credits = 1;
-          toast("Demo enabled");
-        }else{
-          State.auth = "logged_out";
-          State.credits = 0;
-          toast("Demo disabled");
-        }
-        updateAll();
-      });
+  toast("Demo disabled (real auth enabled)");
+});
+
     }
 /* ============================
    Supabase Auth + Credits (REAL)
@@ -1802,13 +1793,12 @@ if(toggleAuth){
       genBtn.addEventListener("click", async ()=>{
         if(State.isGenerating) return;
 
-        if(State.auth === "logged_out"){
-          toast("Log in to use a free generation later");
-          State.auth = "logged_in";
-          State.credits = 1;
-          updateAll();
-          return;
-        }
+       if(State.auth === "logged_out"){
+  toast("Log in to generate");
+  openAuthModal();
+  return;
+}
+
 
         if(State.credits <= 0){
           toast("Credits required. Choose a plan below");
@@ -1944,6 +1934,7 @@ if (contactForm) {
   </script>
 </body>
 </html>
+
 
 
 
