@@ -1655,21 +1655,146 @@
         updateAll();
       });
     }
+/* ============================
+   Supabase Auth + Credits (REAL)
+   ============================ */
 
-    if(toggleAuth){
-      toggleAuth.addEventListener("click", ()=>{
-        if(State.auth === "logged_out"){
-          State.auth = "logged_in";
-          State.credits = Math.max(State.credits, 1);
-          toast("Logged in");
-        }else{
-          State.auth = "logged_out";
-          State.credits = 0;
-          toast("Logged out");
-        }
-        updateAll();
-      });
+let supabaseClient = null;
+let session = null;
+
+// Modal elements (you added these in HTML)
+const authModal = document.getElementById("authModal");
+const authClose = document.getElementById("authClose");
+const authEmail = document.getElementById("authEmail");
+const authPass = document.getElementById("authPass");
+const authLogin = document.getElementById("authLogin");
+const authSignup = document.getElementById("authSignup");
+
+function openAuthModal(){
+  if(!authModal) return;
+  authModal.style.display = "block";
+}
+function closeAuthModal(){
+  if(!authModal) return;
+  authModal.style.display = "none";
+}
+
+if(authClose){
+  authClose.addEventListener("click", closeAuthModal);
+}
+if(authModal){
+  authModal.addEventListener("click", (e)=>{
+    if(e.target === authModal) closeAuthModal();
+  });
+}
+
+async function initAuth(){
+  try{
+    const r = await fetch("/api/public-config");
+    const j = await r.json();
+
+    if(!r.ok || !j.ok){
+      console.error("public-config error", j);
+      toast("Auth config missing");
+      return;
     }
+
+    supabaseClient = window.supabase.createClient(j.supabaseUrl, j.supabaseAnonKey);
+
+    const { data } = await supabaseClient.auth.getSession();
+    session = data?.session || null;
+
+    supabaseClient.auth.onAuthStateChange((_event, newSession)=>{
+      session = newSession;
+      refreshMe();
+    });
+
+    await refreshMe();
+  }catch(err){
+    console.error(err);
+    toast("Auth init failed");
+  }
+}
+
+async function refreshMe(){
+  if(!session?.access_token){
+    State.auth = "logged_out";
+    State.credits = 0;
+    updateAll();
+    return;
+  }
+
+  const r = await fetch("/api/me", {
+    headers: { Authorization: `Bearer ${session.access_token}` }
+  });
+
+  const j = await r.json();
+
+  if(!r.ok || !j.ok){
+    console.error("me error", j);
+    State.auth = "logged_out";
+    State.credits = 0;
+    updateAll();
+    return;
+  }
+
+  State.auth = "logged_in";
+  State.credits = Number(j.credits || 0);
+  updateAll();
+}
+
+// Hook modal buttons
+if(authLogin){
+  authLogin.addEventListener("click", async ()=>{
+    if(!supabaseClient) return toast("Auth loading…");
+    const email = (authEmail?.value || "").trim();
+    const password = (authPass?.value || "").trim();
+    if(!email || !password) return toast("Enter email + password");
+
+    const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+    if(error) return toast(error.message);
+
+    toast("Logged in");
+    closeAuthModal();
+  });
+}
+
+if(authSignup){
+  authSignup.addEventListener("click", async ()=>{
+    if(!supabaseClient) return toast("Auth loading…");
+    const email = (authEmail?.value || "").trim();
+    const password = (authPass?.value || "").trim();
+    if(!email || !password) return toast("Enter email + password");
+
+    const { error } = await supabaseClient.auth.signUp({ email, password });
+    if(error) return toast(error.message);
+
+    toast("Account created");
+    closeAuthModal();
+  });
+}
+
+// Start on load
+initAuth();
+
+if(toggleAuth){
+  toggleAuth.addEventListener("click", async ()=>{
+    if(!supabaseClient){
+      toast("Auth loading…");
+      return;
+    }
+
+    // If logged in → log out
+    if(State.auth === "logged_in"){
+      await supabaseClient.auth.signOut();
+      toast("Logged out");
+      return;
+    }
+
+    // If logged out → open login modal
+    openAuthModal();
+  });
+}
 
     function wait(ms){ return new Promise(r=>setTimeout(r, ms)); }
 
@@ -1819,5 +1944,6 @@ if (contactForm) {
   </script>
 </body>
 </html>
+
 
 
