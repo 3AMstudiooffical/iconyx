@@ -1902,25 +1902,52 @@ try{
       updateMeta();
     }
 
-    function purchasePlan(plan){
-      toast(`Checkout for ${cap(plan)} will open later`);
-    }
-    window.purchasePlan = purchasePlan;
-
-  const contactForm = document.getElementById("contactForm");
-
-if (contactForm) {
-  contactForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const name = (document.getElementById("cName")?.value || "").trim();
-    const email = (document.getElementById("cEmail")?.value || "").trim();
-    const message = (document.getElementById("cMsg")?.value || "").trim();
-
-    if (!name || !email || !message) {
-      toast("Please fill all fields");
+ async function purchasePlan(plan){
+  try{
+    // Must be logged in so we can attach credits to the right user
+    if(!session?.user?.id){
+      toast("Log in to purchase a plan");
+      openAuthModal();
       return;
     }
+
+    // Optional: if you want email passed to Stripe Checkout
+    const email = session?.user?.email || null;
+
+    const r = await fetch("/api/stripe-checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        plan: String(plan || "").toLowerCase(),
+        userId: session.user.id,
+        email
+      })
+    });
+
+    const j = await r.json().catch(()=>null);
+
+    if(!r.ok){
+      const msg = j?.error || "Checkout failed";
+      console.error("stripe-checkout failed:", j);
+      toast(msg);
+      return;
+    }
+
+    if(!j?.url){
+      toast("Checkout URL missing");
+      console.error("No url returned:", j);
+      return;
+    }
+
+    // Redirect to Stripe Checkout
+    window.location.href = j.url;
+
+  }catch(err){
+    console.error(err);
+    toast("Checkout error");
+  }
+}
+
 
     try {
       toast("Sending…");
@@ -1964,6 +1991,7 @@ if (contactForm) {
   </script>
 </body>
 </html>
+
 
 
 
