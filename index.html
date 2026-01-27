@@ -1639,13 +1639,12 @@
       });
     }
 
-    let demoOn = false;
-    if(demoMode)
-      demoMode.addEventListener("click", ()=>{
-  toast("Demo disabled (real auth enabled)");
-});
-
-    }
+let demoOn = false;
+if(demoMode){
+  demoMode.addEventListener("click", ()=>{
+    toast("Demo disabled (real auth enabled)");
+  });
+}
 /* ============================
    Supabase Auth + Credits (REAL)
    ============================ */
@@ -1934,6 +1933,7 @@ if (contactForm) {
   </script>
 </body>
 </html>
+
 
 
 
