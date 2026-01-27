@@ -1414,6 +1414,27 @@
     <span class="dot" aria-hidden="true"></span>
     <span class="msg" id="toastMsg">Saved</span>
   </div>
+  <div id="authModal" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,.55);">
+  <div style="max-width:440px; margin:10vh auto; background:#fff; border-radius:18px; padding:18px; box-shadow:0 20px 60px rgba(0,0,0,.25);">
+    <div style="display:flex; align-items:center; justify-content:space-between;">
+      <strong style="font-size:16px;">Account</strong>
+      <button id="authClose" class="btn small ghost" type="button">Close</button>
+    </div>
+
+    <div style="margin-top:12px; display:grid; gap:10px;">
+      <input id="authEmail" type="email" placeholder="Email" style="padding:12px 12px; border:1px solid rgba(0,0,0,.12); border-radius:12px;">
+      <input id="authPass" type="password" placeholder="Password" style="padding:12px 12px; border:1px solid rgba(0,0,0,.12); border-radius:12px;">
+
+      <button id="authLogin" class="btn primary" type="button">Log in</button>
+      <button id="authSignup" class="btn ghost" type="button">Sign up</button>
+
+      <div style="font-size:12px; opacity:.7; line-height:1.4;">
+        Accounts are secured by Supabase. Credits are tied to your account.
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script>
@@ -1798,4 +1819,5 @@ if (contactForm) {
   </script>
 </body>
 </html>
+
 
