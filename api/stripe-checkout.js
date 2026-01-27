@@ -33,19 +33,21 @@ export default async function handler(req, res) {
       },
     });
 
-    return res.json({ url: session.url });
- } catch (err) {
-  console.error("Stripe checkout error:", err);
+      return res.json({ url: session.url });
+  } catch (err) {
+    console.error("Stripe checkout error:", err);
 
-  const message =
-    err?.raw?.message ||
-    err?.message ||
-    "Stripe checkout failed";
+    const message =
+      err?.raw?.message ||
+      err?.message ||
+      "Stripe checkout failed";
 
-  return res.status(500).json({
-    error: message,
-    type: err?.type || null,
-    code: err?.code || null
-  });
+    return res.status(500).json({
+      error: message,
+      type: err?.type || null,
+      code: err?.code || null
+    });
+  }
 }
+
 
