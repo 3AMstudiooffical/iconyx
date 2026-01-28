@@ -395,6 +395,16 @@
     }
   </style>
 </head>
+<div id="payBanner" style="display:none; position:fixed; top:16px; left:50%; transform:translateX(-50%); z-index:9999; max-width:92vw; width:520px; padding:14px 16px; border-radius:14px; background:#111; color:#fff; box-shadow:0 10px 30px rgba(0,0,0,.35); font-family:inherit;">
+  <div style="display:flex; align-items:flex-start; gap:10px;">
+    <div id="payBannerIcon" style="width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,.08); flex:0 0 auto;">✅</div>
+    <div style="flex:1 1 auto;">
+      <div id="payBannerTitle" style="font-weight:700; font-size:14px; line-height:1.2;">Payment successful</div>
+      <div id="payBannerMsg" style="opacity:.85; font-size:13px; margin-top:4px;">Updating your credits…</div>
+    </div>
+    <button id="payBannerClose" type="button" style="background:transparent; border:0; color:#fff; opacity:.7; font-size:18px; line-height:1; cursor:pointer;">×</button>
+  </div>
+</div>
 
 <body>
   <div class="bg-noise"></div>
@@ -1979,6 +1989,37 @@ if (contactForm) {
     const toastEl = document.getElementById("toast");
     const toastMsg = document.getElementById("toastMsg");
     let toastT = null;
+function showPayBanner(kind, msg){
+  const el = document.getElementById("payBanner");
+  const icon = document.getElementById("payBannerIcon");
+  const title = document.getElementById("payBannerTitle");
+  const body = document.getElementById("payBannerMsg");
+  const close = document.getElementById("payBannerClose");
+
+  if(!el || !icon || !title || !body) return;
+
+  if(kind === "success"){
+    icon.textContent = "✅";
+    title.textContent = "Payment successful";
+    body.textContent = msg || "Updating your credits…";
+  } else if(kind === "canceled"){
+    icon.textContent = "⚠️";
+    title.textContent = "Payment canceled";
+    body.textContent = msg || "No worries — you can try again anytime.";
+  } else {
+    icon.textContent = "ℹ️";
+    title.textContent = "Update";
+    body.textContent = msg || "";
+  }
+
+  el.style.display = "block";
+
+  if(close){
+    close.onclick = () => (el.style.display = "none");
+  }
+
+  setTimeout(() => { el.style.display = "none"; }, 6000);
+}
 
     function toast(message){
       if(!toastEl || !toastMsg) return;
@@ -1987,11 +2028,23 @@ if (contactForm) {
       clearTimeout(toastT);
       toastT = setTimeout(()=> toastEl.classList.remove("on"), 2400);
     }
+const params = new URLSearchParams(window.location.search);
+
+if(params.get("success") === "1"){
+  showPayBanner("success", "Credits added. Updating your balance…");
+  window.history.replaceState({}, document.title, window.location.pathname);
+}
+
+if(params.get("canceled") === "1"){
+  showPayBanner("canceled");
+  window.history.replaceState({}, document.title, window.location.pathname);
+}
 
     updateAll();
   </script>
 </body>
 </html>
+
 
 
 
