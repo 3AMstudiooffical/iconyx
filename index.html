@@ -1584,12 +1584,19 @@
     function updateCredits(){
       if(!creditCount || !creditPill) return;
  if(State.auth === "logged_in"){
-  const current = Number(creditCount.textContent || 0);
-  const next = Number(State.credits || 0);
-  animateNumber(creditCount, current, next);
+  const currentRaw = (creditCount.textContent || "").trim();
+  const current = Number(currentRaw);
+  const next = Number(State.credits);
+
+  animateNumber(
+    creditCount,
+    Number.isFinite(current) ? current : 0,
+    Number.isFinite(next) ? next : 0
+  );
 }else{
   creditCount.textContent = "—";
 }
+
 
       creditPill.style.opacity = (State.auth === "logged_in") ? "1" : ".78";
     }
@@ -2064,6 +2071,7 @@ if(params.get("canceled") === "1"){
   </script>
 </body>
 </html>
+
 
 
 
