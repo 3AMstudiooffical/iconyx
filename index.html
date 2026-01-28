@@ -1583,7 +1583,14 @@
     function updateHeaderAuth(){ if(toggleAuth) toggleAuth.textContent = (State.auth === "logged_in") ? "Log out" : "Log in"; }
     function updateCredits(){
       if(!creditCount || !creditPill) return;
-      creditCount.textContent = (State.auth === "logged_in") ? String(State.credits) : "—";
+ if(State.auth === "logged_in"){
+  const current = Number(creditCount.textContent || 0);
+  const next = Number(State.credits || 0);
+  animateNumber(creditCount, current, next);
+}else{
+  creditCount.textContent = "—";
+}
+
       creditPill.style.opacity = (State.auth === "logged_in") ? "1" : ".78";
     }
     function updateButtons(){
@@ -2020,6 +2027,19 @@ function showPayBanner(kind, msg){
 
   setTimeout(() => { el.style.display = "none"; }, 6000);
 }
+  function animateNumber(el, from, to, ms=550){
+  if(!el) return;
+  const start = performance.now();
+  const diff = to - from;
+
+  function tick(now){
+    const t = Math.min(1, (now - start) / ms);
+    const eased = 1 - Math.pow(1 - t, 3);
+    el.textContent = Math.round(from + diff * eased);
+    if(t < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
 
     function toast(message){
       if(!toastEl || !toastMsg) return;
@@ -2044,6 +2064,7 @@ if(params.get("canceled") === "1"){
   </script>
 </body>
 </html>
+
 
 
 
