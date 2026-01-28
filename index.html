@@ -1754,7 +1754,9 @@ async function refreshMe(){
 
   State.auth = "logged_in";
   State.credits = Number(j.credits || 0);
-  updateAll();
+  updateAll(); 
+  toast("Logged in ✅");
+  maybeCelebrateCredits();
 }
 
 // Hook modal buttons
@@ -1997,6 +1999,19 @@ if (contactForm) {
   });
 }
 
+let _lastCredits = 0;
+
+function maybeCelebrateCredits(){
+  const now = Number(State.credits);
+  if(!Number.isFinite(now)) return;
+
+  // Only celebrate if credits increased (ex: after webhook adds)
+  if(now > _lastCredits){
+    toast("Credits added ✅");
+  }
+
+  _lastCredits = now;
+}
 
 
     /* Toast */
@@ -2071,6 +2086,7 @@ if(params.get("canceled") === "1"){
   </script>
 </body>
 </html>
+
 
 
 
